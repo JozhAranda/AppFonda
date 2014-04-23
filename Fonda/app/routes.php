@@ -10,7 +10,9 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::get('/', function (){
+   return Redirect::to('auth/panel');
+});
 
 Route::get('/','HomeController@index');
-
 Route::controller('auth', 'AuthController');
