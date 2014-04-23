@@ -14,11 +14,10 @@ class CreateFoodTable extends Migration {
 	{
 		Schema::create('food', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('id');
-			$table->text('name');
-			$table->text('description');
-			$table->longblob('photo');
-			$table->integer('price');
+			$table->string('name');
+			$table->string('description');
+			$table->string('photo');
+			$table->float('price');
 			$table->timestamps();
 			$table->softDeletes();
 		});
