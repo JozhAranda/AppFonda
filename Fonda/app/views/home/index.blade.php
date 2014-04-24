@@ -32,21 +32,29 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Header</th>
-            <th>Header</th>
-            <th>Header</th>
-            <th>Header</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Number</th>
+            <th>Food</th>
+            <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody>          
+    @foreach ($orders as $order)
           <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
+            <td>{{$order->id}}</td>
+            <td>{{$order->name}}</td>
+            <td>{{$order->last_name}}</td>
+            <td>{{$order->number}}</td>
+            <td>{{$order->food_name}}</td>
+            <td>
+              {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', 'id'=>'user'))) }}
+                {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs')) }}
+              {{ Form::close() }}
+            </td>
           </tr>
+    @endforeach
         </tbody>
       </table>
       

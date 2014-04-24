@@ -15,13 +15,13 @@
 	<div class="row placeholders">
 		@foreach ($users as $user)
 
-	      <div class="col-xs-6 col-sm-2 placeholder">
+	      <div class="col-xs-6 col-sm-2 placeholder" id="content-users">
 	      	<span>
 	        	{{ Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->id))) }}
-					<button type="submit" name="Delete" class="close" aria-hidden="true">&times;</button>
+					<button type="submit" name="Delete" class="close" id="delete_user" aria-hidden="true">&times;</button>
 				{{ Form::close() }}
 			</span>
-	        {{HTML::image('images/user.png','Imagen not founded', array('width'=>'120px'))}}
+	        <img src="{{ asset('images/user.png') }}" alt="user" width="120px">
 	        <h4>{{$user->name}}</h4>
 	        <span class="text-muted">{{ $user->description }}
 	        	{{ link_to_route('users.edit', '', $user->id, array('class' => 'glyphicon glyphicon-edit')) }}

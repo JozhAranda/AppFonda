@@ -1,11 +1,12 @@
 <?php
 
-class OrdensController extends BaseController {
+class OrdersController extends BaseController {
 
 	public function index()
 	{
-		$foods = Food::paginate(5);
-		return View::make('food.index', compact($food));
+		$orders = DB::select('select orders.id as id, users.name as name, users.last_name as last_name, orders.number as number, foods.name as food_name from orders, users, foods where users.id = orders.user_id and foods.id = orders.food_id');
+		//$orders = Order::orderBy('id', 'asc')->paginate(7);
+		return View::make('home.index', compact('orders'));
 	}
 
 }

@@ -17,13 +17,13 @@ class UsersController extends BaseController {
 
 	public function store()
 	{
-		//$input = Input::all();
 
-		//$validator = Validator::make($input, User::$RulesUser);
+		try
+		{
 
-		//if ($validator->fails()) throw new Exception($validator->messages());
-		
-		try {
+			$input = Input::all();
+			$validator = Validator::make($input, User::$rulesUser);
+
 			$user 				= new User;
 			$user->name 		= Input::get('name');
 			$user->last_name 	= Input::get('last_name');
@@ -31,8 +31,15 @@ class UsersController extends BaseController {
 			$user->password 	= Input::get('password');
 			//$user->type_user 	= Input::has('type_user');
 			//$user->type_user 	= Input::has('type_user') ? intval(Input::get('type_user')) : null
-			$user->save();
+			if ($validator->fails()){
+				$erros = $validator->messages()->all();
+				return View::make('users.create')->with('user', $user)->with('errors', $erros);
+			}else{
+				$food->save();
+				
+			}
 			return Redirect::to('users')->with('notice', 'Added new user');
+
 		} catch (Exception $e) {
 			
 		}
