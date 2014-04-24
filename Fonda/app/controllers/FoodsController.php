@@ -3,7 +3,7 @@ class FoodsController extends BaseController {
 
 	public function index()
 	{
-		$foods = Food::paginate(12);
+		$foods = Food::paginate(15);
 		return View::make('foods.index', compact('foods'));
 	}
 
@@ -53,6 +53,12 @@ class FoodsController extends BaseController {
 
 	public function destroy($id)
 	{
+		try {
+			$food = Food::find($id);
+			$food->delete();
+		} catch (Exception $e) {
+						
+		}
 	}
 
 }

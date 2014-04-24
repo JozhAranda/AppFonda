@@ -15,7 +15,7 @@
 	<div class="row placeholders">
 		@foreach ($foods as $food)
 
-	      <div class="col-xs-5 col-sm-2" style="margin:10px">
+	      <div class="col-xs-5 col-sm-2" style="margin:10px" id="content-foods">
 	      	<span>
 	        	{{ Form::open(array('method' => 'DELETE', 'route' => array('foods.destroy', $food->id))) }}
 					<button type="button" id="btn-remove-food" class="close" aria-hidden="true">&times;</button>
