@@ -8,7 +8,7 @@ $("#content-foods .close").on('click', function () {
 		
 		$(form).ajaxSubmit({
 			beforeSend: function () {
-				console.log('Removind');
+				console.log('Removing');
 			},
 			error: function (e) {
 				console.log('Error:'+e);
@@ -21,4 +21,23 @@ $("#content-foods .close").on('click', function () {
 		});
 
 	}
+});
+
+$('#add-food').validate({
+	rules: {
+		name: {
+			required: true
+		},
+		description: {
+			required: true
+		},
+	},
+	messages: {
+		name: {
+			required: "Please enter a food name"
+		},
+		description: {
+			required: "Please provide a description"
+		}
+	},
 });
