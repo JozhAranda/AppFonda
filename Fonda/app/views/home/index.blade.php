@@ -50,9 +50,9 @@
             <td>{{$order->food_name}}</td>
             <td>
               {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', 'id'=>'user'))) }}
-                {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs')) }}
+                {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
               {{ Form::close() }}
-            </td>
+           </td>
           </tr>
     @endforeach
         </tbody>

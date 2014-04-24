@@ -9,4 +9,21 @@ class OrdersController extends BaseController {
 		return View::make('home.index', compact('orders'));
 	}
 
+	public function update($id)
+	{
+		try {
+			
+			$order 			= Order::find($id);
+			$order->check 	= Input::get('check');
+			$order->save();
+		
+		} catch (Exception $e) {
+		
+			return 'Error';
+		
+		}
+		
+		return Redirect::to('users')->with('notice', 'Edited');
+	}
+
 }
