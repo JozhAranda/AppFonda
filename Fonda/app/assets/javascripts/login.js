@@ -1,12 +1,10 @@
 $('#login').validate({
 	rules: {
 		username: {
-			required: true,
-			minlength: 2
+			required: true
 		},
 		password: {
-			required: true,
-			minlength: 8
+			required: true
 		},
 	},
 	messages: {

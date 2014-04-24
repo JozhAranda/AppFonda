@@ -2,46 +2,36 @@
 
 @section('content')
 
-	<h1>foods</h1>
+ <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	<h1>Foods</h1>
 
-	<hr>
-
+	
 	<div class="form-group">
-		{{ link_to_route('users.create', 'Create User', null, ['class' => 'btn btn-success']) }}
+		{{ link_to_route('foods.create', 'Create Food', null, ['class' => 'btn btn-success']) }}
 	</div>
+	@if(Session::has('notice'))
+		<p class="bg-primary" style="padding:15px"> {{ Session::get('notice') }} </p>
+	@endif
+	<div class="row placeholders">
+		@foreach ($foods as $food)
 
-	<table class="table table-bordered table-stripped">
-		<thead>
-			<tr>
-				<th>Photo</th>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Description</th>
-				<th></th>
-
-			</tr>
-		</thead>
-
-		<tbody>
-			@foreach ($foods as $food)
-			<tr>
-				<td> <img src="{{asset('assets/images/Jellyfish.jpg')}}" /></td>
-				<td>{{ $food->id }}</td>
-				<td>{{ $food->name }}</td>
-				<td>{{ $food->description }}</td>
-
-				<td>
-					{{-- link_to_route('users.edit', 'Edit', $user->id, array('class' => 'btn btn-primary btn-sm pull-left')) --}}
-					{{-- Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->id))) --}}
-						{{-- Form::submit('Delete', array('class' => 'btn btn-danger btn-sm')) --}}
-					{{-- Form::close() --}}
-				</td>
-			</tr>
-			@endforeach
-		</tbody>
-
-	</table>
-
+	      <div class="col-xs-6 col-sm-2 placeholder">
+	      	<span>
+	        	{{ Form::open(array('method' => 'DELETE', 'route' => array('foods.destroy', $food->id))) }}
+					<button type="button" class="close" aria-hidden="true">&times;</button>
+				{{ Form::close() }}
+			</span>
+	        <img src="assets/images/foods/Jellyfish.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+	        <h4>{{$food->name}}</h4>
+	        <span class="text-muted">{{ $food->description }}</span>
+	        
+	      </div>
+	    @endforeach
+    </div>	
+	{{-- link_to_route('users.edit', 'Edit', $user->id, array('class' => 'btn btn-primary btn-sm pull-left')) --}}
+	{{-- Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->id))) --}}
+		{{-- Form::submit('Delete', array('class' => 'btn btn-danger btn-sm')) --}}
+	{{-- Form::close() --}}
 	{{ $foods->links() }}
-
+</div>
 @stop

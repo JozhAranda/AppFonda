@@ -13,7 +13,7 @@ class AuthController extends BaseController {
          'password' => Input::get('password')
       );
 
-      $validator = Validator::make($user_data, Auth::$createRules);
+      //$validator = Validator::make($user_data);
 
       if(Auth::attempt($user_data)){
    

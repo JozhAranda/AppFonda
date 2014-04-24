@@ -12,7 +12,7 @@
            <p> <strong> {{ $error }} </strong> </p>
         @endif
         <div class="container">
-            {{ Form::open(array('url' => 'auth/login', 'class' => 'form-signin'), 'id' => 'login') }} 
+            {{ Form::open(array('url' => 'auth/login', 'class' => 'form-signin', 'id' => 'login')) }} 
                 <h2 class="form-signin-heading">Sign in</h2>
                {{ Form::label('username', 'Username') }}
 

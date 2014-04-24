@@ -9,10 +9,41 @@
         <link rel="author" href="humans.txt">
     </head>
     <body>
-      
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">App Fonda</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Settings</a></li>
+            <li>{{ link_to('/auth/logout', 'Logout')}}</li>
+          </ul>
+          <!--form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form-->
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li> {{ link_to('/', 'Home') }}</li>
+            <li> {{ link_to_route('foods.index', 'Foods', null) }}</li>
+            <li> {{ link_to_route('users.index', 'Users', null) }} </li>
+            <li> {{ link_to_route('orders.index', 'Orders', null) }}</li>
+          </ul>
+        </div>
         @yield('content')
-        {{ javascript_include_tag() }}
-          <p></p>
+      </div>
+    </div>
+    {{ javascript_include_tag() }}
     </body>
-
 </html>

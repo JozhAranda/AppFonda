@@ -19,3 +19,4 @@ Route::controller('auth', 'AuthController');
 Route::resource('type_user', 'TypeUserController');
 Route::resource('users', 'UsersController');
 Route::resource('foods', 'FoodsController');
+Route::resource('orders', 'OrdernsController');
