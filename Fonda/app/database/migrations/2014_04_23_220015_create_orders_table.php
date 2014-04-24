@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration {
 			$table->integer('user_id');
 			$table->integer('food_id');
 			$table->integer('number');
+			$table->integer('check');
 			$table->timestamps();
 			$table->softDeletes();
 		});

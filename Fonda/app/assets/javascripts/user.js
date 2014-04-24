@@ -1,32 +1,32 @@
-$("#content-users .close").on('click', function () {
-	if (confirm('Do you sure want to remove this user?')) {
-		
-		$(this).closest('div').fadeOut(function () {
-			$(this).remove();
-		});
-		var form = $(this).closest('form');
-		
-		$(form).ajaxSubmit({
-			beforeSend: function () {
-				console.log('Removing');
-			},
-			error: function (e) {
-				console.log('Error:'+e);
-			},
-			success: function (res) {
-				
-			}, complete: function () {
-				console.log('Complete');
-			}
-		});
+$('#content-users .close').on('click', function(event) {
+	event.preventDefault();
 
-	}
+	var button = $(this);
+
+	bootbox.dialog({
+		message: "Do you really want to delete this user?",
+		title: "Delete User",
+		buttons: {
+			no: {
+				label: "No",
+				className: "btn-default",
+			},
+			yes: {
+				label: "Yes",
+				className: "btn-success",
+				callback: function() {
+					button.closest('form').submit();
+				}
+			}
+		}
+	});
 });
 
 $('#add-user').validate({
 	rules: {
 		name: {
-			required: true
+			required: true,
+			minlength: 2
 		},
 		last_name: {
 			required: true,
@@ -49,10 +49,10 @@ $('#add-user').validate({
 			required: "Please enter a last name"
 		},
 		username: {
-			required: "Your username must consist of at least 2 characters"
+			required: "Your username must consist of at least 7 characters"
 		},
 		password: {
 			required: "Please enter a password"
 		},
-	},
+	}
 });
