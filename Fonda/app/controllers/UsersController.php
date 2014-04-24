@@ -24,11 +24,9 @@ class UsersController extends BaseController {
 
 	public function store()
 	{
-<<<<<<< HEAD
+
 		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		//$input = Input::all();
-=======
->>>>>>> a6638b0342a2cf9faef411c2db867525d3646135
 
 		try
 		{

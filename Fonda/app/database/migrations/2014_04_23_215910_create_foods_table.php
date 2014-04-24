@@ -31,7 +31,7 @@ class CreateFoodsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('foods');
+		Schema::drop('food');
 	}
 
 }
