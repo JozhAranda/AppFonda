@@ -15,23 +15,23 @@
 	<div class="row placeholders">
 		@foreach ($foods as $food)
 
-	      <div class="col-xs-6 col-sm-2 placeholder">
+	      <div class="col-xs-5 col-sm-2" style="margin:10px">
 	      	<span>
 	        	{{ Form::open(array('method' => 'DELETE', 'route' => array('foods.destroy', $food->id))) }}
-					<button type="button" class="close" aria-hidden="true">&times;</button>
+					<button type="button" id="btn-remove-food" class="close" aria-hidden="true">&times;</button>
 				{{ Form::close() }}
 			</span>
-	        <img src="assets/images/foods/Jellyfish.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+			{{HTML::image('images/Jellyfish.jpg','Imagen not founded' ,array('width'=>'120px'))}} {{--array('class' => 'img-responsive')--}}
 	        <h4>{{$food->name}}</h4>
-	        <span class="text-muted">{{ $food->description }}</span>
+	        <span class="text-muted">{{ $food->description }}
+	        	{{ link_to_route('foods.edit', '', $food->id, array('class' => 'glyphicon glyphicon-edit')) }}
+	        </span>
 	        
 	      </div>
 	    @endforeach
     </div>	
-	{{-- link_to_route('users.edit', 'Edit', $user->id, array('class' => 'btn btn-primary btn-sm pull-left')) --}}
-	{{-- Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->id))) --}}
-		{{-- Form::submit('Delete', array('class' => 'btn btn-danger btn-sm')) --}}
-	{{-- Form::close() --}}
+	
+
 	{{ $foods->links() }}
 </div>
 @stop

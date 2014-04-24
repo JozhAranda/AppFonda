@@ -34,10 +34,21 @@ class FoodsController extends BaseController {
 
 	public function edit($id)
 	{
+		$food = Food::find($id);
+		return View::make('foods.edit', compact('food'));
 	}
 
 	public function update($id)
 	{
+		try {
+			$food = Food::find($id);
+			$food->name = Input::get('name');
+			$food->description = Input::get('description');
+			$food->save();
+		} catch (Exception $e) {
+			return 'Error';
+		}
+		return Redirect::to('foods')->with('notice', 'Edited');
 	}
 
 	public function destroy($id)
