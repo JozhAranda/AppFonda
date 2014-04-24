@@ -9,6 +9,7 @@ class FoodsController extends BaseController {
 
 	public function create()
 	{
+
 		$food = new Food;
 		return View::make('foods.create', compact('food'));
 	}
@@ -16,13 +17,26 @@ class FoodsController extends BaseController {
 	public function store()
 	{
 		try {
-			$food = new Food;
-			$food->name 		= Input::get('name');
-			$food->description 	= Input::get('description');
-			$food->save();
-			return Redirect::to('foods')->with('notice', 'Added new food');
-		} catch (Exception $e) {
+			$input = Input::all();
+
+			$validator = Validator::make($input, Food::$createRules);
 			
+			$food = new Food;
+			$food->name 		= $input['name'];
+			$food->description 	= $input['description'];
+
+			if ($validator->fails()){
+				$erros = $validator->messages()->all();
+				return View::make('foods.edit')->with('food', $food)->with('errors', $erros);
+			}else{
+				$food->save();
+				return Redirect::to('foods')->with('notice', 'Added new food');
+			}
+
+			
+			
+		} catch (Exception $e) {
+			return 'error'.$e;
 		}
 
 	}
