@@ -21,17 +21,14 @@
 					<button type="submit" name="Delete" class="close" aria-hidden="true">&times;</button>
 				{{ Form::close() }}
 			</span>
-	        <img src="assets/images/foods/Jellyfish.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
+	        {{HTML::image('images/user.png','Imagen not founded', array('width'=>'120px'))}}
 	        <h4>{{$user->name}}</h4>
-	        <span class="text-muted">{{ $user->description }}</span>
+	        <span class="text-muted">{{ $user->description }}
+	        	{{ link_to_route('users.edit', '', $user->id, array('class' => 'glyphicon glyphicon-edit')) }}
+	        </span>
 	        
 	      </div>
 	    @endforeach
     </div>	
-	{{-- link_to_route('users.edit', 'Edit', $user->id, array('class' => 'btn btn-primary btn-sm pull-left')) --}}
-	{{-- Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->id))) --}}
-		{{-- Form::submit('Delete', array('class' => 'btn btn-danger btn-sm')) --}}
-	{{-- Form::close() --}}
-	{{-- $users->links() --}}
 </div>
 @stop

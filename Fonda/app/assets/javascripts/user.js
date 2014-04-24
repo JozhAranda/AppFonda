@@ -1,8 +1,32 @@
+$("#content-users .close").on('click', function () {
+	if (confirm('Do you sure want to remove this user?')) {
+		
+		$(this).closest('div').fadeOut(function () {
+			$(this).remove();
+		});
+		var form = $(this).closest('form');
+		
+		$(form).ajaxSubmit({
+			beforeSend: function () {
+				console.log('Removing');
+			},
+			error: function (e) {
+				console.log('Error:'+e);
+			},
+			success: function (res) {
+				
+			}, complete: function () {
+				console.log('Complete');
+			}
+		});
+
+	}
+});
+
 $('#add-user').validate({
 	rules: {
 		name: {
-			required: true,
-			minlength: 2
+			required: true
 		},
 		last_name: {
 			required: true,
@@ -31,29 +55,4 @@ $('#add-user').validate({
 			required: "Please enter a password"
 		},
 	},
-});
-
-$("#content-users .close").on('click', function () {
-	if (confirm('Do you sure want to remove this user?')) {
-		
-		$(this).closest('div').fadeOut(function () {
-			$(this).remove();
-		});
-		var form = $(this).closest('form');
-		
-		$(form).ajaxSubmit({
-			beforeSend: function () {
-				console.log('Removing');
-			},
-			error: function (e) {
-				console.log('Error:'+e);
-			},
-			success: function (res) {
-				
-			}, complete: function () {
-				console.log('Complete');
-			}
-		});
-
-	}
 });
