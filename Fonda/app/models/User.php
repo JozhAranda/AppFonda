@@ -80,4 +80,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+	public static $createRules = array(
+		'password' => 'required',
+		'name'     => 'required'
+	);
 }

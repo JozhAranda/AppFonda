@@ -12,13 +12,13 @@
            <p> <strong> {{ $error }} </strong> </p>
         @endif
         <div class="container">
-            {{ Form::open(array('url' => 'auth/login', 'class' => 'form-signin')) }} 
+            {{ Form::open(array('url' => 'auth/login', 'class' => 'form-signin'), 'id' => 'login') }} 
                 <h2 class="form-signin-heading">Sign in</h2>
-               {{ Form::label('username', 'User name') }}
+               {{ Form::label('username', 'Username') }}
 
                {{ Form::text('username', '', array('class'=>'form-control')) }}
 
-               {{ Form::label('password', 'Contraseña') }}
+               {{ Form::label('password', 'Password') }}
 
                {{ Form::password('password', array('class'=>'form-control')) }}
 

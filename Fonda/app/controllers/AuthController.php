@@ -4,7 +4,6 @@ class AuthController extends BaseController {
       return View::make('auth.login');
    }
    public function postLogin() {
-      //return md5(Input::get('password'));
       
       $user_data = array(
          'username' => Input::get('username'),
