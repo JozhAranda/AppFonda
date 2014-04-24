@@ -11,7 +11,8 @@ class UsersController extends BaseController {
 	public function create()
 	{		
 		$user = new User;
-		return View::make('users.create', compact('user'));
+		$type_user = DB::table('type_users')->orderBy('id', 'asc')->lists('name');
+		return View::make('users.create', compact('user'))->with('type_user',$type_user);
 	}
 
 	public function store()
