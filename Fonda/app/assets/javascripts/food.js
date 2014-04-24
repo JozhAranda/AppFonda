@@ -8,7 +8,7 @@ $("#content-foods .close").on('click', function () {
 		
 		$(form).ajaxSubmit({
 			beforeSend: function () {
-				console.log('Removind');
+				console.log('Removing');
 			},
 			error: function (e) {
 				console.log('Error:'+e);
@@ -40,6 +40,7 @@ $('#add-food').validate({
 			required: "Please provide a description"
 		}
 	},
+<<<<<<< HEAD
 /*	submitHandler: function(form) {
 		$(form).ajaxSubmit({
 			dataType: 'JSON',
@@ -59,4 +60,6 @@ $('#add-food').validate({
 			}
 		});
 	}*/
+=======
+>>>>>>> 1f00770aa2c96bd42aa4934848853c35aa1e16a3
 });
