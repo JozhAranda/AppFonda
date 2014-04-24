@@ -50,7 +50,7 @@
             <td>{{$order->food_name}}</td>
             <td>
             @if($order->check == 1)
-              {{ Form::submit('Check', array('class' => 'btn btn-disable btn-xs', 'value' => '1')) }}
+              {{ Form::submit('Check', array('class' => 'btn btn-disable btn-xs')) }}
             @else  
               {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', $order->number, 'id'=>'user'))) }}
                 {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
