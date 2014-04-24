@@ -4,8 +4,8 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		
-		return View::make('home.index');
+		$orders = Order::all();
+		return View::make('home.index', compact('orders'));
 	}
 
 }
