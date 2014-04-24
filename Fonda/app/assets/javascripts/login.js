@@ -17,7 +17,7 @@ $('#login').validate({
 			required: "Please provide a password"
 		}
 	},
-	submitHandler: function(form) {
+/*	submitHandler: function(form) {
 		$(form).ajaxSubmit({
 			dataType: 'JSON',
 			beforeSend: function() {
@@ -35,5 +35,5 @@ $('#login').validate({
 				console.log('complete!');
 			}
 		});
-	}
+	}*/
 });

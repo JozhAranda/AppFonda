@@ -9,7 +9,7 @@
         <link rel="author" href="humans.txt">
     </head>
     <body>
-        <p>{{ link_to('/auth/logout', 'cerrar session')}}</p>
+        <!--p>{{ link_to('/auth/logout', 'cerrar session')}}</p-->
         @yield('content')
         {{ javascript_include_tag() }}
     </body>
