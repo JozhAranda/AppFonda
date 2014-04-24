@@ -20,3 +20,5 @@ Route::resource('type_user', 'TypeUserController');
 Route::resource('users', 'UsersController');
 Route::resource('foods', 'FoodsController');
 Route::resource('orders', 'OrdersController');
+
+Route::get('orders/show/{number}', 'OrdersController@show');
