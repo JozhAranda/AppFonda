@@ -9,5 +9,5 @@
 </div>
 
 <div class="form-group">
-	{{ Form::submit('Save', array('class' => 'btn-success')) }}
+	{{ Form::submit('Save', array('class' => 'btn btn-success')) }} {{ link_to('foods', 'Cancel', array('class'=>'btn btn-danger'))}}
 </div>

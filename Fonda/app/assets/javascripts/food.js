@@ -23,7 +23,7 @@ $("#content-foods .close").on('click', function () {
 	}
 });
 
-$('#add-food').validate({
+$('#form-food').validate({
 	rules: {
 		name: {
 			required: true

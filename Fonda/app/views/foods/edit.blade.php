@@ -8,8 +8,8 @@
 				@endforeach
 			</ul>
 		@endif
-	<h2 class="sub-header">Add</h2>
-		{{ Form::model($food, array('method'=> 'PUT', 'route' => array('foods.update', $food->id), 'id'=>'food')) }}
+	<h2 class="sub-header">Edit</h2>
+		{{ Form::model($food, array('method'=> 'PUT', 'route' => array('foods.update', $food->id), 'id'=>'form-food')) }}
 			@include('foods._form')
 		{{ Form::close() }}
 	</div>

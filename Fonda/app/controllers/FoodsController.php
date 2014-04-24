@@ -17,23 +17,24 @@ class FoodsController extends BaseController {
 	public function store()
 	{
 		try {
-			$input = Input::all();
+			$inputs = Input::all();
 
-			$validator = Validator::make($input, Food::$createRules);
+			//$validator = Food::validate($input);
 			
 			$food = new Food;
-			$food->name 		= $input['name'];
-			$food->description 	= $input['description'];
+			$food->name 		= $inputs['name'];
+			$food->description 	= $inputs['description'];
+			
+			$validator = Food::validate($inputs);
 
 			if ($validator->fails()){
 				$erros = $validator->messages()->all();
-				return View::make('foods.edit')->with('food', $food)->with('errors', $erros);
+				return View::make('foods.create')->with('food', $food)->with('errors', $erros);
 			}else{
 				$food->save();
-				return Redirect::to('foods')->with('notice', 'Added new food');
+				
 			}
-
-			
+			return Redirect::to('foods')->with('notice', 'Added new food');
 			
 		} catch (Exception $e) {
 			return 'error'.$e;
