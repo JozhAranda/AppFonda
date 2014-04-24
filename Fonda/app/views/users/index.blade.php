@@ -18,7 +18,7 @@
 	      <div class="col-xs-6 col-sm-2 placeholder">
 	      	<span>
 	        	{{ Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->id))) }}
-					<button type="button" class="close" aria-hidden="true">&times;</button>
+					<button type="submit" name="Delete" class="close" aria-hidden="true">&times;</button>
 				{{ Form::close() }}
 			</span>
 	        <img src="assets/images/foods/Jellyfish.jpg" class="img-responsive" alt="Generic placeholder thumbnail">

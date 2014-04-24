@@ -22,7 +22,7 @@ class UsersController extends BaseController {
 			$user->last_name 	= Input::get('last_name');
 			$user->username 	= Input::get('username');
 			$user->password 	= Input::get('password');
-			//$user->type_user 	= Input::get('type_user');
+			$user->type_user 	= Input::get('type_user');
 			$user->save();
 			return Redirect::to('users')->with('notice', 'Added new user');
 		} catch (Exception $e) {
@@ -44,7 +44,10 @@ class UsersController extends BaseController {
 	}
 
 	public function destroy($id)
-	{
+	{		
+		$user = User::find($id);
+		$user->delete();
+		return Redirect::route('users.index');
 	}
 
 }
