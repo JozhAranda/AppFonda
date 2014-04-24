@@ -47,7 +47,7 @@
             <td>{{$order->name}}</td>
             <td>{{$order->last_name}}</td>
             <td>{{$order->number}}</td>
-            <td>{{ link_to_route('orders.show_orders', 'View', $order->id, array('class' => 'btn btn-primary btn-xs')) }}</td>
+            <td>{{$order->food_name}}</td>
             <td>
             @if($order->check == 1)
               {{ Form::submit('Check', array('class' => 'btn btn-disable btn-xs')) }}
