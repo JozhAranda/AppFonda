@@ -2,6 +2,12 @@
 
 class UsersController extends BaseController {
 
+	private $auth;
+
+	public function __construct() {
+		$this->auth = (Auth::user()->type_id == 1);
+	}
+
 	public function index()
 	{
 		$users = User::all();
@@ -9,7 +15,8 @@ class UsersController extends BaseController {
 	}
 
 	public function create()
-	{		
+	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		$user = new User;
 		$type_user = DB::table('type_users')->orderBy('id', 'asc')->lists('name');
 		return View::make('users.create', compact('user'))->with('type_user', $type_user);
@@ -17,6 +24,7 @@ class UsersController extends BaseController {
 
 	public function store()
 	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		//$input = Input::all();
 
 		//$validator = Validator::make($input, User::$RulesUser);
@@ -28,7 +36,7 @@ class UsersController extends BaseController {
 			$user->name 		= Input::get('name');
 			$user->last_name 	= Input::get('last_name');
 			$user->username 	= Input::get('username');
-			$user->password 	= Input::get('password');
+			$user->password 	= Hash::make(Input::get('password'));
 			//$user->type_user 	= Input::has('type_user');
 			//$user->type_user 	= Input::has('type_user') ? intval(Input::get('type_user')) : null
 			$user->save();
@@ -45,12 +53,14 @@ class UsersController extends BaseController {
 
 	public function edit($id)
 	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		$user = User::find($id);
 		return View::make('users.edit', compact('user'));
 	}
 
 	public function update($id)
 	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		try {
 			
 			$user 				= User::find($id);
@@ -69,7 +79,8 @@ class UsersController extends BaseController {
 	}
 
 	public function destroy($id)
-	{		
+	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");		
 		$user = User::find($id);
 		$user->delete();
 		return Redirect::route('users.index');

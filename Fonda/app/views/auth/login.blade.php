@@ -11,7 +11,11 @@
         @if(isset($error))
            <p> <strong> {{ $error }} </strong> </p>
         @endif
+
         <div class="container">
+          @if(Session::has('notice'))
+            <p class="bg-danger" style="padding:15px"> {{ Session::get('notice') }} </p>
+          @endif
             {{ Form::open(array('url' => 'auth/login', 'class' => 'form-signin', 'id' => 'login')) }} 
                 <h2 class="form-signin-heading">Sign in</h2>
                {{ Form::label('username', 'Username') }}

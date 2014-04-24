@@ -16,7 +16,11 @@ class AuthController extends BaseController {
       //$validator = Validator::make($user_data);
 
       if(Auth::attempt($user_data)){
-   
+         
+         $user = Auth::user();
+         Session::put('name-user', $user->name);
+         Session::put('type-user', $user->type_id);
+
          return Redirect::to('/');
    
       }else{
@@ -28,6 +32,9 @@ class AuthController extends BaseController {
    public function getWelcome(){
       
       if(Auth::check()){
+         
+
+         
        
          $user = Auth::user();
          return View::make('/');

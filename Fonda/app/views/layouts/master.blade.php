@@ -22,8 +22,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Settings</a></li>
+            <li><a href="#"> {{ Session::get('name-user')}}</a></li>
             <li>{{ link_to('/auth/logout', 'Logout')}}</li>
+            <!--<img src="{{ asset('images/foods/Jellyfish.jpg') }}" alt="">-->
           </ul>
           <!--form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">

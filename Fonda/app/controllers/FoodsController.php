@@ -1,21 +1,27 @@
 <?php
 class FoodsController extends BaseController {
 
+	private $auth;
+	public function __construct() {
+		$this->auth = (Auth::user()->type_id == 1);
+	}
+
 	public function index()
 	{
 		$foods = Food::paginate(15);
-		return View::make('foods.index', compact('foods'));
+		return View::make('foods.index', compact('foods'))->with('auth', $this->auth);
 	}
 
 	public function create()
 	{
-
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', 'You must log in of type Administrator');
 		$food = new Food;
 		return View::make('foods.create', compact('food'));
 	}
 
 	public function store()
 	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', 'You must log in of type Administrator');
 		try {
 			$inputs = Input::all();
 
@@ -49,12 +55,14 @@ class FoodsController extends BaseController {
 
 	public function edit($id)
 	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', 'You must log in of type Administrator');
 		$food = Food::find($id);
 		return View::make('foods.edit', compact('food'));
 	}
 
 	public function update($id)
 	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('notice', 'You must log in of type Administrator');
 		try {
 			$food = Food::find($id);
 			$food->name = Input::get('name');
@@ -68,6 +76,7 @@ class FoodsController extends BaseController {
 
 	public function destroy($id)
 	{
+		if(!$this->auth) return Redirect::to('auth/login')->with('You must log in of type Administrator');
 		try {
 			$food = Food::find($id);
 			$food->delete();
