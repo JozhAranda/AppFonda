@@ -23,7 +23,7 @@ class OrdersController extends BaseController {
 	public function create()
 	{
 		$order = new Order;
-		$food = Food::lists('name', 'id');		
+		$food = Food::all();		
 		return View::make('orders.create', compact('order'))->with('food', $food);
 	}
 
