@@ -24,7 +24,7 @@
             <td>{{ $order->name .' '. $order->last_name }}</td>
             <td>{{ $order->number }}</td>
             <td>{{ $order->food_name }}</td>
-            <td>{{ $order->date_order }}</td>
+           	<td>{{ date("d F Y", strtotime($order->date_order)) }} at {{ date("g:ha", strtotime($order->date_order)) }}</td>
             <td>@if($order->checks == 1) Yes @else No @endif</td>
           </tr>
     @endforeach
@@ -32,6 +32,7 @@
         </tbody>
       </table>
       
+	{{ link_to('/orders', 'Go back', array('class' => 'label label-info')) }}
     </div>
 	<hr>
  </div>	

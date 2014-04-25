@@ -2,11 +2,22 @@
 
 class OrdersController extends BaseController {
 
+	private $auth;
+	
+	public function __construct() 
+	{
+		$this->auth = (Auth::user()->type_id == 1);
+	}
+
 	public function index()
 	{
-		//$orders = DB::select('select orders.id as id, users.name as name, users.last_name as last_name, orders.number as number, foods.name as food_name, orders.check as check from orders, users, foods where users.id = orders.user_id and foods.id = orders.food_id');
-		$orders = Order::groupBy('number')->get();
-		return View::make('orders.index', compact('orders'));
+		if ($this->auth) {
+			$orders = Order::groupBy('number')->with('user')->paginate(10);
+			return View::make('orders.index', compact('orders'))->with('auth', $this->auth);
+		}else{
+			$orders = Order::groupBy('number')->where('user_id', Session::get('id-user'))->paginate(10);
+			return View::make('orders.index', compact('orders'))->with('auth', $this->auth);
+		}
 	}
 
 	public function update($id)
@@ -30,7 +41,6 @@ class OrdersController extends BaseController {
 
 	public function show($id)
 	{
-		//$orders = Order::where('number', $id)->get();
 		$orders = DB::select('select users.name as name, users.last_name as last_name, orders.number as number, foods.name as food_name, orders.check as checks, orders.updated_at as date_order from orders, users, foods where users.id = orders.user_id and foods.id = orders.food_id and orders.number = ?', array($id));
 		
 		return View::make('orders.show', compact('orders'));

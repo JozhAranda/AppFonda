@@ -18,7 +18,7 @@ class UsersController extends BaseController {
 	{
 		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		$user = new User;
-		$type_user = DB::table('type_users')->orderBy('id', 'asc')->lists('name', 'id')->get();
+		$type_user = DB::table('type_users')->orderBy('id', 'asc')->lists('name', 'id');
 		return View::make('users.create', compact('user'))->with('type_user', $type_user);
 	}
 
@@ -79,16 +79,8 @@ class UsersController extends BaseController {
 			$user->last_name 	= $inputs['last_name'];
 			$user->username 	= $inputs['username'];
 			$user->type_id 		= $inputs['type_user'];
-
-			/*$validator = User::validate_update($inputs);
-
-			if ($validator->fails()){
-				$errors = $validator->messages()->all();
-				return View::make('users.edit')->with('user', $user)->with('errors', $errors);
-			}else{*/
-				$user->save();
-				
-			//}
+			$user->save();
+			
 			return Redirect::to('users')->with('notice', 'Edited user');
 
 		} catch (Exception $e) {
