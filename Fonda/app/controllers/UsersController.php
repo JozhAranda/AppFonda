@@ -80,7 +80,7 @@ class UsersController extends BaseController {
 			$user->username 	= $inputs['username'];
 			$user->type_id 		= $inputs['type_user'];
 			$user->save();
-			
+
 			return Redirect::to('users')->with('notice', 'Edited user');
 
 		} catch (Exception $e) {
