@@ -10,11 +10,13 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::get('/', function (){
+/*Route::get('/', function (){
    return Redirect::to('auth/panel');
 });
+*/
+Route::get('/','AuthController@getWelcome');
+Route::get('/', 'HomeController@index');
 
-Route::get('/','HomeController@index');
 Route::controller('auth', 'AuthController');
 Route::resource('type_user', 'TypeUserController');
 Route::resource('users', 'UsersController');

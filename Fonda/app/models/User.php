@@ -117,10 +117,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'last_name.required' 	=> 'Required',
 		'last_name.min'			=> 'Required mix characteres 3',
 		'last_name.max'			=> 'Requires max characteres 40',
-		'last_name.alpha' 		=> 'Required last_name alpha',
-		'username.unique' 		=> 'Required unique',
+		'last_name.alpha' 		=> 'Required last_name alpha'
 	);
-	
+
 	public static function validate_create($data, $id=null) {
 		$rules = self::$rules_create;
 		$messages = self::$messages_create;
