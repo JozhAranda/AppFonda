@@ -88,17 +88,16 @@ class UsersController extends BaseController {
 				$user->password = Hash::make($inputs['new_password']);
 			}
 
-			/*$validator = User::validate_update($inputs);
+			$validator = User::validate_update($inputs);
 
 			if ($validator->fails()){
+				$type_user = TypeUser::lists('name', 'id');
 				$errors = $validator->messages()->all();
-				return View::make('users.edit')->with('user', $user)->with('errors', $errors);
-			}else{*/
+				return View::make('users.edit')->with('user', $user)->with('errors', $errors)->with('type_id', $user->type_id)->with('type_user', $type_user);;
+			}else{
 				$user->save();
-				
-			//}
-			return Redirect::to('users')->with('notice', 'Edited user');
-
+				return Redirect::to('users')->with('notice', 'Edited user');
+			}
 		} catch (Exception $e) {
 			return 'error'.$e;
 		}

@@ -85,15 +85,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rules_create = array(
 		'name' 		=> 'required|min:3|max:40|alpha',
-		'username' => 'unique:users',
+		'username' => 'required|unique:users',
 		'last_name' => 'required|min:3|max:50|alpha',
-        'password'  =>'required|alphanum|between:4,8',
+        'password'  =>'required|alphanum|between:4,8'
 	);
 
 	public static $rules_update = array(
 		'name' 		=> 'required|min:3|max:40|alpha',
-		'username' => 'unique:users',
-		'last_name' => 'required|min:3|max:50|alpha',
+		'username' 	=> 'required',
+		'last_name' => 'required|min:3|max:50|alpha'
 	);
 
 	public static $messages_create = array(
@@ -106,7 +106,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'last_name.max'			=> 'Requires max characteres 40',
 		'last_name.alpha' 		=> 'Required last_name alpha',
 		'username.unique' 		=> 'Required unique',
+		'username.require' 		=> 'Required',
 		'passowrd.required' 	=> 'Required passowrd',
+		'username.require' 		=> 'Required username'
 	);
 
 	public static $messages_update = array(
@@ -117,7 +119,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'last_name.required' 	=> 'Required',
 		'last_name.min'			=> 'Required mix characteres 3',
 		'last_name.max'			=> 'Requires max characteres 40',
-		'last_name.alpha' 		=> 'Required last_name alpha'
+		'last_name.alpha' 		=> 'Required last_name alpha',
+		'username.require' 		=> 'Required username'
 	);
 
 	public static function validate_create($data, $id=null) {

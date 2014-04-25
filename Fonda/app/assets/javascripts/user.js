@@ -22,7 +22,7 @@ $('#content-users .close').on('click', function(event) {
 	});
 });
 
-$('#add-user').validate({
+$('#').validate({
 	rules: {
 		name: {
 			required: true,
