@@ -18,6 +18,7 @@ class AuthController extends BaseController {
       if(Auth::attempt($user_data)){
          
          $user = Auth::user();
+         Session::put('id-user', $user->id);
          Session::put('name-user', $user->name);
          Session::put('type-user', $user->type_id);
 

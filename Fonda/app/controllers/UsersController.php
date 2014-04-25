@@ -10,8 +10,8 @@ class UsersController extends BaseController {
 
 	public function index()
 	{
-		$users = User::all();
-		return View::make('users.index', compact('users'));
+		$users = User::where('id', '<>', '1')->get();
+		return View::make('users.index', compact('users'))->with('auth', $this->auth);
 	}
 
 	public function create()
@@ -26,32 +26,31 @@ class UsersController extends BaseController {
 	{
 
 		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
-		//$input = Input::all();
-
 		try
 		{
 
-			$input = Input::all();
-			$validator = Validator::make($input, User::$rulesUser);
+			$inputs = Input::all();
 
 			$user 				= new User;
-			$user->name 		= Input::get('name');
-			$user->last_name 	= Input::get('last_name');
-			$user->username 	= Input::get('username');
-			$user->password 	= Hash::make(Input::get('password'));
-			//$user->type_user 	= Input::has('type_user');
-			//$user->type_user 	= Input::has('type_user') ? intval(Input::get('type_user')) : null
+			$user->name 		= $inputs['name'];
+			$user->last_name 	= $inputs['last_name'];
+			$user->username 	= $inputs['username'];
+			$user->type_id 		= $inputs['type_user'];
+			$user->password 	= Hash::make($inputs['password']);
+
+			$validator = User::validate_create($inputs);
+
 			if ($validator->fails()){
-				$erros = $validator->messages()->all();
-				return View::make('users.create')->with('user', $user)->with('errors', $erros);
+				$errors = $validator->messages()->all();
+				return View::make('users.create')->with('user', $user)->with('errors', $errors);
 			}else{
-				$food->save();
+				$user->save();
 				
 			}
 			return Redirect::to('users')->with('notice', 'Added new user');
 
 		} catch (Exception $e) {
-			
+			return 'error'.$e;
 		}
 	}
 
@@ -70,21 +69,31 @@ class UsersController extends BaseController {
 	public function update($id)
 	{
 		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
-		try {
-			
+		try
+		{
+
+			$inputs = Input::all();
+
 			$user 				= User::find($id);
-			$user->name 		= Input::get('name');
-			$user->last_name 	= Input::get('last_name');
-			$user->username 	= Input::get('username');
-			$user->save();
-		
+			$user->name 		= $inputs['name'];
+			$user->last_name 	= $inputs['last_name'];
+			$user->username 	= $inputs['username'];
+			$user->type_id 		= $inputs['type_user'];
+
+			$validator = User::validate_update($inputs);
+
+			if ($validator->fails()){
+				$errors = $validator->messages()->all();
+				return View::make('users.create')->with('user', $user)->with('errors', $errors);
+			}else{
+				$user->save();
+				
+			}
+			return Redirect::to('users')->with('notice', 'Edited user');
+
 		} catch (Exception $e) {
-		
-			return 'Error';
-		
+			return 'error'.$e;
 		}
-		
-		return Redirect::to('users')->with('notice', 'Edited');
 	}
 
 	public function destroy($id)

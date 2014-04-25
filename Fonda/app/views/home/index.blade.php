@@ -32,31 +32,37 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Name</th>
+            <th>Order number</th>
+             @if($auth)
+            <th>Name user</th>
             <th>Last name</th>
-            <th>Number</th>
-            <th>Food</th>
             <th>Actions</th>
+             @endif
+            <th>Foods</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>          
     @foreach ($orders as $order)
           <tr>
-            <td>{{$order->id}}</td>
-            <td>{{$order->name}}</td>
-            <td>{{$order->last_name}}</td>
+            
             <td>{{$order->number}}</td>
-            <td>{{$order->food_name}}</td>
-            <td>
-            @if($order->check == 1)
-              {{ Form::submit('Check', array('class' => 'btn btn-disable btn-xs')) }}
-            @else  
-              {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', $order->number, 'id'=>'user'))) }}
-                {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
-              {{ Form::close() }}
-            @endif
-           </td>
+            
+            @if($auth)
+            <td>{{$order->user->name}}</td>
+            <td>{{$order->user->last_name}}</td>
+              <td>
+              @if($order->check == 1)
+                {{ Form::submit('Check', array('class' => 'btn btn-disable btn-xs')) }}
+              @else  
+                {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', $order->number, 'id'=>'user'))) }}
+                  {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
+                {{ Form::close() }}
+              @endif
+             </td>
+           @endif
+           <td>{{ link_to('orders/show_orders', 'View', $order->id, array('class' => 'btn btn-primary btn-xs')) }}</td>
+           <td>{{$order->created_at}}</td>
           </tr>
     @endforeach
         </tbody>
