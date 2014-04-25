@@ -10,7 +10,8 @@ class UsersController extends BaseController {
 
 	public function index()
 	{
-		$users = User::where('id', '<>', '1')->get();
+		$user_id = Auth::user()->id;
+		$users = User::where('id', '<>', '1')->where('id', '<>', $user_id)->get();
 		return View::make('users.index', compact('users'))->with('auth', $this->auth);
 	}
 
@@ -18,8 +19,8 @@ class UsersController extends BaseController {
 	{
 		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		$user = new User;
-		$type_user = DB::table('type_users')->orderBy('id', 'asc')->lists('name', 'id')->get();
-		return View::make('users.create', compact('user'))->with('type_user', $type_user);
+		$type_user = TypeUser::lists('name', 'id');
+		return View::make('users.create', compact('user'))->with('type_user', $type_user)->with('type_id', 2);
 	}
 
 	public function store()
@@ -41,8 +42,9 @@ class UsersController extends BaseController {
 			$validator = User::validate_create($inputs);
 
 			if ($validator->fails()){
+				$type_user = TypeUser::lists('name', 'id');
 				$errors = $validator->messages()->all();
-				return View::make('users.create')->with('user', $user)->with('errors', $errors);
+				return View::make('users.create')->with('user', $user)->with('errors', $errors)->with('type_id', $user->type_id)->with('type_user', $type_user);
 			}else{
 				$user->save();
 				
@@ -63,7 +65,8 @@ class UsersController extends BaseController {
 	{
 		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		$user = User::find($id);
-		return View::make('users.edit', compact('user'));
+		$type_user = TypeUser::lists('name', 'id');
+		return View::make('users.edit', compact('user'))->with('type_user', $type_user)->with('type_id', $user->type_id);
 	}
 
 	public function update($id)
@@ -79,6 +82,10 @@ class UsersController extends BaseController {
 			$user->last_name 	= $inputs['last_name'];
 			$user->username 	= $inputs['username'];
 			$user->type_id 		= $inputs['type_user'];
+
+			if ($inputs['new_password']) {
+				$user->password = Hash::make($inputs['new_password']);
+			}
 
 			/*$validator = User::validate_update($inputs);
 

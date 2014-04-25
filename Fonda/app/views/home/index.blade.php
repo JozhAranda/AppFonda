@@ -39,7 +39,7 @@
             <th>Actions</th>
              @endif
             <th>Foods</th>
-            <th>Date</th>
+            <th>Date (Day) </th>
           </tr>
         </thead>
         <tbody>          
@@ -62,7 +62,7 @@
              </td>
            @endif
            <td>{{ link_to('orders/show_orders', 'View', $order->id, array('class' => 'btn btn-primary btn-xs')) }}</td>
-           <td>{{$order->created_at}}</td>
+           <td>{{$order->created_at}} / {{ date('D', strtotime($order->created_at))}}</td>
           </tr>
     @endforeach
         </tbody>
