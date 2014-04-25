@@ -20,6 +20,40 @@ class OrdersController extends BaseController {
 		}
 	}
 
+	public function create()
+	{
+		$order = new Order;
+		$food = Food::lists('name', 'id');		
+		return View::make('orders.create', compact('order'))->with('food', $food);
+	}
+
+	public function store()
+	{
+		try
+		{
+
+			$inputs = Input::all();
+			$foods = Input::get('foods');
+			$count = count($foods);
+			
+			for ($i = 0; $i < $count; $i++) 
+			{
+				$order 			= new Order;
+				$order->user_id = $inputs['user'];
+				$order->food_id = $foods[$i];
+				$order->number 	= $inputs['user'];
+				$order->check 	= 0;
+
+				$order->save();
+			}
+			return Redirect::to('orders')->with('notice', 'Get new order');
+
+		} catch (Exception $e) {
+			return 'error'.$e;
+		}
+	}
+
+
 	public function update($id)
 	{
 		try {
