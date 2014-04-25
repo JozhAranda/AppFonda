@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('developer04-PC'),
+	'local' => array('Sistemas02-HP'),
 
 ));
 

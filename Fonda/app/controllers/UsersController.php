@@ -1,5 +1,4 @@
 <?php
-
 class UsersController extends BaseController {
 
 	private $auth;
