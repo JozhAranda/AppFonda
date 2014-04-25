@@ -12,7 +12,7 @@
             <th>Last name</th>
             <th>Number</th>
             <th>Food</th>
-            <th>Actions</th>
+            <th>Paid</th>
           </tr>
         </thead>
         <tbody>          
@@ -25,10 +25,10 @@
             <td>{{ link_to_route('orders.show', 'View', $order->number, array('class' => 'btn btn-primary btn-xs')) }}</td>
             <td>
             @if($order->check == 1)
-              {{ Form::submit('Check', array('class' => 'btn btn-xs disabled')) }}
+              {{ Form::submit('Yes', array('class' => 'btn btn-xs disabled')) }}
             @else  
               {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', $order->number, 'id'=>'user'))) }}
-                {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
+                {{ Form::submit('No', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
               {{ Form::close() }}
             @endif
            </td>
