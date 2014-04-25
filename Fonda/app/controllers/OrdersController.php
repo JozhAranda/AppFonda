@@ -28,25 +28,19 @@ class OrdersController extends BaseController {
 		return Redirect::to('orders')->with('notice', 'Check');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	
 	public function show($id)
 	{
-		$orders = Order::where('number', $id)->get();
+		//$orders = Order::where('number', $id)->get();
+		$orders = DB::select('select users.name as name, users.last_name as last_name, orders.number as number, foods.name as food_name, orders.check as checks, orders.update_at as date_order from orders, users, foods where users.id = orders.user_id and foods.id = orders.food_id and orders.number = ?', array($id));
 		
 		return View::make('orders.show', compact('orders'));
 	}
 
-	public function orders($id)
+	/*public function orders($id)
 	{
 		$orders = Order::where('number', $id)->get();
 
 		return View::make('orders.orders', compact('orders'));
-	}
+	}*/
 
 }
