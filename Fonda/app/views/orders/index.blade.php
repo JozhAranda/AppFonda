@@ -22,10 +22,10 @@
             <td>{{$order->name}}</td>
             <td>{{$order->last_name}}</td>
             <td>{{$order->number}}</td>
-            <td>{{$order->food_name}}</td>
+            <td>{{ link_to_route('orders.show', 'View', $order->number, array('class' => 'btn btn-primary btn-xs')) }}</td>
             <td>
             @if($order->check == 1)
-              {{ Form::submit('Check', array('class' => 'btn btn-disable btn-xs')) }}
+              {{ Form::submit('Check', array('class' => 'btn btn-xs disabled')) }}
             @else  
               {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', $order->number, 'id'=>'user'))) }}
                 {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}

@@ -6,7 +6,6 @@ class OrdersController extends BaseController {
 	{
 		//$orders = DB::select('select orders.id as id, users.name as name, users.last_name as last_name, orders.number as number, foods.name as food_name, orders.check as check from orders, users, foods where users.id = orders.user_id and foods.id = orders.food_id');
 		$orders = Order::groupBy('number')->get();
-		//$orders = Order::orderBy('id', 'asc')->paginate(7);
 		return View::make('orders.index', compact('orders'));
 	}
 
@@ -29,16 +28,25 @@ class OrdersController extends BaseController {
 		return Redirect::to('orders')->with('notice', 'Check');
 	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	
 	public function show($id)
 	{
-		//
+		$orders = Order::where('number', $id)->get();
+		
+		return View::make('orders.show', compact('orders'));
 	}
 
-	public function show_orders()
+	public function orders($id)
 	{
 		$orders = Order::where('number', $id)->get();
 
-		return View::make('orders.show_orders', compact('orders'));
+		return View::make('orders.orders', compact('orders'));
 	}
 
 }
