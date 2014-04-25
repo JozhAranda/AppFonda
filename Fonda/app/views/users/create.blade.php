@@ -9,7 +9,7 @@
 			</ul>
 		@endif
 		<h2 class="sub-header">Add</h2>
-		{{ Form::model($user, array('route' => 'users.store', 'id'=> 'add-user')) }}
+		{{ Form::model($user, array('route' => 'users.store', 'id'=> 'form-user')) }}
 			@include('users._form')
 		{{ Form::close()}}
 	</div>

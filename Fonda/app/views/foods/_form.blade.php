@@ -10,5 +10,5 @@
 
 <div class="form-group">
 	{{ Form::submit('Save', array('class' => 'btn btn-success')) }} 
-	<a href="{{URL::previous()}}" class="btn btn-danger">Cancel</a>
+		{{ link_to('foods','Cancel', array('class'=>'btn btn-danger'))}}
 </div>
