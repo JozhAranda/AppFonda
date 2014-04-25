@@ -28,10 +28,10 @@
             <td>{{$order->user->last_name}}</td>
               <td>
               @if($order->check == 1)
-                {{ Form::submit('Yes', array('class' => 'btn disabled btn-xs')) }}
+                {{ Form::submit('Yes', array('class' => 'btn disabled btn-xs', 'data-toggle' => 'popover', 'title' => 'Order paid', 'data-content' => 'And here some amazing content. It very engaging')) }}
               @else  
                 {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', $order->number, 'id'=>'user'))) }}
-                  {{ Form::submit('No', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
+                  {{ Form::submit('No', array('class' => 'btn btn-warning btn-xs', 'value' => '1', 'data-toggle' => 'popover', 'title' => 'Press if the user has already paid the order', 'data-content' => 'And here some amazing content. It very engaging')) }}
                 {{ Form::close() }}
               @endif
              </td>
