@@ -1,11 +1,9 @@
 <h3>Food</h3>
-<?php $i = 0 ?>
 <div class="row">
 @foreach ($food as $food)
-      <?php $i = $i + 1 ?>
       <div class="col-xs-5 col-sm-2" style="margin:10px" id="accordion">
       	<img src="{{ asset('images/foods/Jellyfish.jpg') }}" width="120" alt="" />
-		<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$food->id}}" data-toggle="tooltip" data-placement="left" title="Tooltip on left"><h4>{{$food->name}}</h4></a>
+		<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$food->id}}" data-toggle="tooltip" data-placement="top" title="View more"><h4>{{$food->name}}</h4></a>
         <div id="collapse{{$food->id}}" class="panel-collapse collapse out">
 	        <span class="text-muted">{{ $food->description }}</span>
         </div>
