@@ -22,7 +22,6 @@
 
 <div class="form-group">
 	{{ Form::label('type_user', 'Type user') }}
-	{{-- Form::select('type_user', $type_user, Input::old('type_user'), array('class'=>'form-control')) --}}
 	{{ Form::select('type_user', array('1' => 'User', '2' => 'Admin'), '1', array('class'=>'form-control')) }}
 </div>
 

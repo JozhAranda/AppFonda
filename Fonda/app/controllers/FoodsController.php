@@ -24,8 +24,6 @@ class FoodsController extends BaseController {
 		if(!$this->auth) return Redirect::to('auth/login')->with('notice', 'You must log in of type Administrator');
 		try {
 			$inputs = Input::all();
-
-			//$validator = Food::validate($input);
 			
 			$food = new Food;
 			$food->name 		= $inputs['name'];
