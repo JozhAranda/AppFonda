@@ -4,35 +4,41 @@
     <h2 class="sub-header">Orders</h2>
     <div class="table-responsive">
 
-      <table class="table table-striped">
+       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Name</th>
+            <th>Order number</th>
+             @if($auth)
+            <th>Name user</th>
             <th>Last name</th>
-            <th>Number</th>
-            <th>Food</th>
-            <th>Actions</th>
+            <th>Paid</th>
+             @endif
+            <th>Foods</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>          
     @foreach ($orders as $order)
           <tr>
-            <td>{{$order->id}}</td>
-            <td>{{$order->name}}</td>
-            <td>{{$order->last_name}}</td>
+            
             <td>{{$order->number}}</td>
-            <td>{{ link_to_route('orders.show', 'View', $order->number, array('class' => 'btn btn-primary btn-xs')) }}</td>
-            <td>
-            @if($order->check == 1)
-              {{ Form::submit('Check', array('class' => 'btn btn-xs disabled')) }}
-            @else  
-              {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', $order->number, 'id'=>'user'))) }}
-                {{ Form::submit('Check', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
-              {{ Form::close() }}
-            @endif
-           </td>
-          </tr>
+            
+            @if($auth)
+            <td>{{$order->user->name}}</td>
+            <td>{{$order->user->last_name}}</td>
+              <td>
+              @if($order->check == 1)
+                {{ Form::submit('Yes', array('class' => 'btn disabled btn-xs')) }}
+              @else  
+                {{ Form::model($order, array('method' => 'PUT', 'route' => array('orders.update', $order->number, 'id'=>'user'))) }}
+                  {{ Form::submit('No', array('class' => 'btn btn-warning btn-xs', 'value' => '1')) }}
+                {{ Form::close() }}
+              @endif
+             </td>
+           @endif
+           <td>{{ link_to_route('orders.show', 'View', $order->number, array('class' => 'btn btn-primary btn-xs')) }}</td>
+           <td>{{ date("d F Y", strtotime($order->updated_at)) }} at {{ date("g:ha", strtotime($order->updated_at)) }}</td>
+           </tr>
     @endforeach
         </tbody>
       </table>

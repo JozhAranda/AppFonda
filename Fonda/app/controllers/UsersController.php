@@ -19,8 +19,13 @@ class UsersController extends BaseController {
 	{
 		if(!$this->auth) return Redirect::to('auth/login')->with('notice', "You must log in of type Administrator");
 		$user = new User;
+<<<<<<< HEAD
 		$type_user = TypeUser::lists('name', 'id');
 		return View::make('users.create', compact('user'))->with('type_user', $type_user)->with('type_id', 2);
+=======
+		$type_user = DB::table('type_users')->orderBy('id', 'asc')->lists('name', 'id');
+		return View::make('users.create', compact('user'))->with('type_user', $type_user);
+>>>>>>> 13fe8ad3c8b5feeed0f0c6c688909ee3426a399b
 	}
 
 	public function store()
@@ -82,7 +87,9 @@ class UsersController extends BaseController {
 			$user->last_name 	= $inputs['last_name'];
 			$user->username 	= $inputs['username'];
 			$user->type_id 		= $inputs['type_user'];
+			$user->save();
 
+<<<<<<< HEAD
 			if ($inputs['new_password']) {
 				$user->password = Hash::make($inputs['new_password']);
 			}
@@ -96,6 +103,8 @@ class UsersController extends BaseController {
 				$user->save();
 				
 			//}
+=======
+>>>>>>> 13fe8ad3c8b5feeed0f0c6c688909ee3426a399b
 			return Redirect::to('users')->with('notice', 'Edited user');
 
 		} catch (Exception $e) {
